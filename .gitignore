@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+
+# Secretos: nunca se versionan (solo la plantilla .env.example)
+.env
+.env.*
+!.env.example
+
+# Herramientas
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Editor / sistema operativo
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.log
