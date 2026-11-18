@@ -15,6 +15,7 @@ Servicio interno, **sin estado y sin acceso a la base de datos**. El backend Dja
 
 - `riesgo_extintores`: 0 vigente · 0.5 vencido · 1 no posee (el mismo valor que usa `calcular_scoring_riesgo`; Django lo calcula, el ML no duplica la regla).
 - `distancia_hidrante_m: null` → se asume `ML_DISTANCIA_SIN_HIDRANTE_M` (500 m, igual que `D_MAX`).
+- **Topes:** Django recorta `carga_fuego` a 1000 MJ/m² y `distancia_hidrante_m` a 500 m (`Q_MAX` y `D_MAX` del scoring) antes de enviarlas: para el scoring todo lo que pase de esos valores es riesgo máximo, y sin el recorte K-Means los trataría como distintos. El microservicio no recorta: confía en lo que recibe.
 - `scoring_riesgo` **no entra al modelo**: solo sirve para nombrar los clusters (menor promedio → `Bajo`, medio → `Medio`, mayor → `Critico`).
 
 Respuesta 200: `k`, `cantidad_actas`, `coeficiente_silueta` (3 decimales, cabe en `NUMERIC(4,3)`), `clusters[{acta_id, cluster_riesgo}]` y `resumen` por cluster.
