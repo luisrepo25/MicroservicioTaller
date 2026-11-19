@@ -10,6 +10,6 @@ RUN pip install --upgrade pip && pip install -r requirements-dev.txt
 
 COPY . .
 
-# Produccion (Railway): uvicorn escucha en $PORT. En desarrollo docker-compose.yml
+# Produccion (Cloud Run): uvicorn escucha en $PORT. En desarrollo docker-compose.yml
 # sobreescribe este comando con --reload.
 CMD ["sh", "-c", "uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8001}"]
